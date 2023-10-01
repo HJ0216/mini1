@@ -3,6 +3,7 @@ package com.project.mini1.domain.posts;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class PostRepository {
 
     private final EntityManager em;
 
+    @Transactional
     public Long save(Posts post){
         if(post.getId()==null){
             em.persist(post);
@@ -33,4 +35,15 @@ public class PostRepository {
                 .getResultList();
     }
 
+    @Transactional
+    public void deleteAll() {
+        em.createQuery("delete p from Posts p")
+                .executeUpdate();
+        /*
+        * JPQL DELETE 쿼리를 실행하면 데이터베이스에서 레코드가 삭제되지만, 영속성 컨텍스트에 해당 엔티티가 여전히 존재할 수 있음
+        * executeUpdate를 호출하면 엔티티 매니저와 영속성 컨텍스트를 동기화
+        * 이렇게 하면 영속성 컨텍스트에서 삭제된 엔티티를 더 이상 관리하지 않음
+        * 
+        * */
+    }
 }
