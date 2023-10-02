@@ -1,5 +1,6 @@
 package com.project.mini1.domain.posts;
 
+import com.project.mini1.domain.entity.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,8 +32,7 @@ import lombok.NoArgsConstructor;
 *
 * */
 //
-
-public class Posts {
+public class Posts extends BaseTimeEntity {
 
     @Id
     @GeneratedValue

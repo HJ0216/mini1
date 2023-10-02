@@ -1,14 +1,17 @@
 package com.project.mini1.domain.posts;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootTest
@@ -81,6 +84,26 @@ public class PostRepositoryTest {
         assertThat(findPost.getTitle()).isEqualTo("Test Title");
         assertThat(findPost.getContent()).isEqualTo("Test Content");
 
+    }
+
+    @Test
+    public void BaseTimeEntity_등록(){
+        // given
+        LocalDateTime now = LocalDateTime.now();
+        Posts post = Posts.builder()
+                .title("JPA Auditing Title")
+                .content("JPA Auditing Content")
+                .author("JPA Auditing Author")
+                .build();
+        Long saveId = postRepository.save(post);
+
+        // when
+        Posts findPost = postRepository.findOne(saveId);
+
+        // then
+        assertTrue(findPost.getCreatedDate().isAfter(now));
+        assertTrue(findPost.getModifiedDate().isAfter(now));
+        // isAfter: 날짜나 시간이 특정 시점 이후인지 확인
     }
 
 }
