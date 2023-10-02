@@ -13,7 +13,7 @@ public class PostRepository {
 
     private final EntityManager em;
 
-    @Transactional
+
     public Long save(Posts post){
         if(post.getId()==null){
             em.persist(post);
@@ -26,6 +26,7 @@ public class PostRepository {
         // post 객체는 고유의 ID(PK)를 갖고 DB에 저장됨 → 해당 ID를 반환하여 참조할 수 있도록 함
     }
 
+
     public Posts findOne(Long id) {
         return em.find(Posts.class, id);
     }
@@ -35,7 +36,7 @@ public class PostRepository {
                 .getResultList();
     }
 
-    @Transactional
+
     public void deleteAll() {
         em.createQuery("delete p from Posts p")
                 .executeUpdate();

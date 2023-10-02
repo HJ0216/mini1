@@ -2,6 +2,7 @@ package com.project.mini1.web;
 
 import com.project.mini1.domain.posts.PostRepository;
 import com.project.mini1.domain.posts.PostSaveDTO;
+import com.project.mini1.domain.posts.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class WebRestController {
 
-    private final PostRepository postRepository;
+    private final PostService postService;
     // final 키워드가 붙은 Field는 객체가 생성되는 시점에 반드시 값이 초기화 되어야 함
     // 'final' 이 붙은 Field 중에 초기화 되지 않은 모든 Field를 Argument로 설정
 
@@ -26,6 +27,6 @@ public class WebRestController {
 
     @PostMapping("/post")
     public void savaPost(@RequestBody PostSaveDTO postSaveDTO){
-        postRepository.save(postSaveDTO.toEntity());
+        postService.savePost(postSaveDTO.toEntity());
     }
 }
