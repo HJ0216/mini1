@@ -4,9 +4,10 @@ import com.project.mini1.domain.posts.PostRepository;
 import com.project.mini1.domain.posts.PostSaveDTO;
 import com.project.mini1.domain.posts.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 public class WebRestController {
 
@@ -20,6 +21,7 @@ public class WebRestController {
     // 스프링 프레임워크 4.3 버전부터 클래스에 단 하나의 생성자만 존재하면, 그 생성자에 @Autowired 어노테이션을 생략해도 스프링이 자동으로 의존성 주입을 수행
 
 
+    @ResponseBody
     @GetMapping("/hello")
     public String hello(){
         return "Hello, IT World!";
@@ -28,5 +30,10 @@ public class WebRestController {
     @PostMapping("/post")
     public void savaPost(@RequestBody PostSaveDTO postSaveDTO){
         postService.savePost(postSaveDTO.toEntity());
+    }
+
+    @GetMapping("/")
+    public String main(){
+        return "main";
     }
 }
