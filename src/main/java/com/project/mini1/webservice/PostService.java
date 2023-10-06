@@ -1,5 +1,8 @@
-package com.project.mini1.domain.posts;
+package com.project.mini1.webservice;
 
+import com.project.mini1.domain.posts.PostRepository;
+import com.project.mini1.domain.posts.PostSaveDTO;
+import com.project.mini1.domain.posts.Posts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +20,9 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public Long savePost(Posts post){
-        return postRepository.save(post);
+    // Commit과 Rollback(Exception 발생 시)을 통해서 데이터 무결성 유지
+    public Long savePost(PostSaveDTO postSaveDTO){
+        return postRepository.save(postSaveDTO.toEntity());
     }
 
     public Posts findPost(Long id){
