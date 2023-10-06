@@ -1,5 +1,6 @@
 package com.project.mini1.domain.posts;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,14 @@ public class PostSaveDTO {
     private String title;
     private String content;
     private String author;
+
+    @Builder
+    // Builder 사용 이유: 채워야할 필드가 무엇인지 명확히 지정할 수 있음
+    public PostSaveDTO(String title, String content, String author) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+    }
 
     public Posts toEntity(){
         return Posts.builder()
