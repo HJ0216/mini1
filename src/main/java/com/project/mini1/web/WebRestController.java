@@ -1,10 +1,13 @@
 package com.project.mini1.web;
 
 import com.project.mini1.domain.posts.PostSaveDTO;
+import com.project.mini1.domain.posts.PostsMainResponseDTO;
 import com.project.mini1.webservice.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,6 +35,11 @@ public class WebRestController {
         // Controller와 Service 의 역할을 분리하기 위함
         // Service: 비지니스 로직 & 트랜잭션 관리
         // Controller: View와 연동되는 부분
+    }
+
+    @PostMapping("/getAllPost")
+    public List<PostsMainResponseDTO> getAllPost() {
+        return postService.findAllPostsDesc();
     }
 
 }
