@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @Repository // DB에 접근하는 Component
 @RequiredArgsConstructor
@@ -31,9 +32,9 @@ public class PostRepository {
         return em.find(Posts.class, id);
     }
 
-    public List<Posts> findAll(){
-        return em.createQuery("select p from Posts p", Posts.class)
-                .getResultList();
+    public Stream<Posts> findAllDesc(){
+        return em.createQuery("select p from Posts p order by p.id desc", Posts.class)
+                .getResultStream();
     }
 
 

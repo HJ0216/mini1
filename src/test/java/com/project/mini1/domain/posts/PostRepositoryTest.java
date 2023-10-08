@@ -67,22 +67,29 @@ public class PostRepositoryTest {
     @Test
     public void 게시글_리스트_조회(){
         // givin
-        Posts post = Posts.builder()
-                .title("Test Title")
-                .content("Test Content")
-                .author("Test Author")
+        Posts post1 = Posts.builder()
+                .title("Test Title1")
+                .content("Test Content1")
+                .author("Test Author1")
+                .build();
+        Posts post2 = Posts.builder()
+                .title("Test Title2")
+                .content("Test Content2")
+                .author("Test Author2")
                 .build();
 
-        Long saveId = postRepository.save(post);
+        Long saveId1 = postRepository.save(post1);
+        Long saveId2 = postRepository.save(post2);
 
 
         // when
-        List<Posts> postList = postRepository.findAll();
+        List<Posts> postList = postRepository.findAllDesc().toList();
+
 
         // then
         Posts findPost = postList.get(0);
-        assertThat(findPost.getTitle()).isEqualTo("Test Title");
-        assertThat(findPost.getContent()).isEqualTo("Test Content");
+        assertThat(findPost.getTitle()).isEqualTo("테스트");
+        assertThat(findPost.getContent()).isEqualTo("테스트의 본문");
 
     }
 

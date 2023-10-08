@@ -65,4 +65,8 @@ public class Posts extends BaseTimeEntity {
         this.author = author;
     }
 
+    // toDTO()를 만들지 않는 이유
+    // Entity가 DTO를 사용하게 되면, 그때부터 View/외부요청에 따라 DTO뿐만 아니라 Entity까지 변경이 필요하게 됩니다.
+    // 다른 DTO도 필요하다고 하면 다시 Entity에 toDto2와 같은 메소드가 추가되는데, 모든 변화에 맞춰 Entity 변경이 필요하게 됩니다.
+
 }
