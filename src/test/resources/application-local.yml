@@ -1,0 +1,6 @@
+# local 환경
+---
+spring:
+  profiles: local
+  jpa:
+    show-sql: true
