@@ -1,8 +1,0 @@
-# local 환경
----
-spring:
-  profiles:
-    activate:
-      on-profile: local
-  jpa:
-    show-sql: true
